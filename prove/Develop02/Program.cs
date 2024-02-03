@@ -36,7 +36,6 @@ class Program
                     Console.Write("--> ");
                     string userEntry = Console.ReadLine();
                     entry._Entry = userEntry;
-                    journal._journal.Add(entry);
                     Console.Clear();
 
                 }
