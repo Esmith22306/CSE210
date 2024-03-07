@@ -23,18 +23,34 @@ public class ReflectingAcitivty : Activity
     "What did you learn about yourself through this experience?",
     "How can you keep this experience in mind in the future?"
     };
-    private List<string> _useQuestionsList = new List<string>();
-
-    private string _prompt;
-    private string _question;
     private string _description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.";
 
 
     //constructor
-    public ReflectingAcitivty(string activityName, int activityTime) : base(activityName, activityTime)
+    public ReflectingAcitivty (string activityName, int activityTime) : base(activityName, activityTime) 
     {
 
     }
+
+    //Methods
+    public void PerformReflection()
+    {
+        DisplayGreeting();
+        Console.WriteLine(_description);
+
+        Random rnd = new Random();
+        string prompt = _promptList[rnd.Next(_promptList.Count)];
+        Console.WriteLine(prompt);
+
+        foreach (string question in _questionList)
+        {
+            Console.WriteLine(question);
+            Spinner(3);
+        }
+        
+        DisplayEnding();
+    }
+
 
 
 
