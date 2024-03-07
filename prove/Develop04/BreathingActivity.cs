@@ -4,8 +4,6 @@ using System;
 public class BreathingActivity : Activity
 {
     //attributes
-    private string _message1 = "Breathe in...";
-    private string _message2 = "Now breathe out...";
     private string _description = "This activity will help you relax by walking your through breathing in and out slowly. Clear your mind and focus on your breathing.";
 
     //constructor
@@ -20,9 +18,9 @@ public class BreathingActivity : Activity
         Console.WriteLine(_description);
         for (int i = 0; i < _activityTime; i++)
         {
-            Console.WriteLine(_message1);
+            Console.WriteLine("Breathe in...");
             Spinner(3);
-            Console.WriteLine(_message2);
+            Console.WriteLine("Now breathe out...");
             Spinner(3);
         }
         DisplayEnding();

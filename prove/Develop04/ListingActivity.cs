@@ -19,6 +19,8 @@ public class ListingActivity : Activity
     public void PerformListing()
     {
         DisplayGreeting();
+        Console.WriteLine(_description);
+        
         Console.WriteLine("Start listing... ");
         Spinner(3);
         Console.WriteLine("Enter items:");
