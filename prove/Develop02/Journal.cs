@@ -12,6 +12,12 @@ public class Journal
 
     }
 
+    public void AddEntry(string dateTime, string prompt, string entry)
+    {
+        journalEntry newEntry = new journalEntry(dateTime, prompt, entry);
+        _journal.Add(newEntry);
+    }
+
     public void Display()
     {
        Console.WriteLine("\n->->->->->-> Journal Entries <-<-<-<-<-<-");       
@@ -23,55 +29,49 @@ public class Journal
         Console.WriteLine("->->->->->-> End <-<-<-<-<-<-");
     }
 
+
     public void CreateJournalFile()
     {
-        Console.Write("Enter file name? ");
+        Console.Write("Enter file name: ");
         string userInput = Console.ReadLine();
         _userFileName = userInput + ".txt";
-        if (!File.Exists(_userFileName))
-        {
-            File.CreateText(_userFileName);
-            Console.Write($"\n->->-> {_userFileName} has been created! <-<-<-\n");
-            Console.Write("->->->Your journal entries have been saved. <-<-<-\n");
-            SaveJournalFile(_userFileName);
-        }
-        else
-        {
-            Console.Write($"\n->->-> {_userFileName} already exits. <-<-<-\n");
-            Console.Write("->->->Your journal entries have been added. <-<-<-\n");
-            SaveJournalFile(_userFileName);
-        }
-    }
 
-    public void SaveJournalFile(string _userFileName)
-    {
         using (StreamWriter outputFile = new StreamWriter(_userFileName))
         {
             foreach (journalEntry entry in _journal)
             {
-                outputFile.WriteLine($"{entry._dateTime};{entry._prompt}; {entry._Entry}");
+                outputFile.WriteLine($"{entry.DateTime};{entry.Prompt};{entry.Entry}");
             }
         }
+
+        Console.WriteLine($"\n{_userFileName} has been created!");
     }
 
 
     public void LoadJournalFile()
     {
-        Console.Write("What is your file name? ");
+        Console.Write("Enter file name: ");
         string userInput = Console.ReadLine();
         _userFileName = userInput + ".txt";
+
         if (File.Exists(_userFileName))
         {
+            _journal.Clear(); // Clear existing entries before loading
+
             List<string> readText = File.ReadAllLines(_userFileName).Where(arg => !string.IsNullOrWhiteSpace(arg)).ToList();
             foreach (string line in readText)
             {
-                string[] entries = line.Split("; ");
-                journalEntry entry = new journalEntry();
-                entry._dateTime = entries[1];
-                entry._prompt = entries[2];
-                entry._Entry = entries[3];
-                _journal.Add(entry);
+                string[] entries = line.Split(';');
+                if (entries.Length >= 3)
+                {
+                    _journal.Add(new journalEntry(entries[0], entries[1], entries[2]));
+                }
             }
+            Console.WriteLine("\nJournal entries loaded successfully.");
+        }
+        else
+        {
+            Console.WriteLine("File not found.");
         }
     }
 }
