@@ -18,7 +18,7 @@ public class Word
         return _word;
     }
 
-    public bool IsHidden()
+    public bool CheckIfHidden()
     {
         return _isHidden;
     }
@@ -26,6 +26,13 @@ public class Word
     {
         _isHidden = true;
     }
+
+    public bool AllHidden()
+    {
+        return true;
+    }
+
+
 
 
 }
