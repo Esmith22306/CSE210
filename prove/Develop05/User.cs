@@ -12,25 +12,61 @@ public class User
         TotalScore = 0;
     }
 
-    public void CreateGoal(string name, string type, int points, int frequency = 0, int totalOccurrences = 0)
+    public void SetGoalsManually()
     {
-        Goal goal;
-        switch (type.ToLower())
+        Console.WriteLine("Enter the number of goals you want to create:");
+        int count;
+        while (!int.TryParse(Console.ReadLine(), out count) || count <= 0)
         {
-            case "simple":
-                goal = new SimpleGoal(name, points);
-                break;
-            case "eternal":
-                goal = new EternalGoal(name, points, frequency);
-                break;
-            case "checklist":
-                goal = new ChecklistGoal(name, points, totalOccurrences);
-                break;
-            default:
-                throw new ArgumentException("Invalid goal type");
+            Console.WriteLine("Invalid input. Please enter a positive integer.");
         }
-        GoalsList.Add(goal);
+
+        for (int i = 0; i < count; i++)
+        {
+            Console.WriteLine($"\nEnter details for Goal {i + 1}:");
+            Console.WriteLine("Enter goal name:");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Enter goal type (Simple, Eternal, or Checklist):");
+            string type = Console.ReadLine();
+
+            Console.WriteLine("Enter points for the goal:");
+            int points;
+            while (!int.TryParse(Console.ReadLine(), out points) || points <= 0)
+            {
+                Console.WriteLine("Invalid input. Please enter a positive integer for points.");
+            }
+
+            switch (type.ToLower())
+            {
+                case "simple":
+                    GoalsList.Add(new SimpleGoal(name, points));
+                    break;
+                case "eternal":
+                    Console.WriteLine("Enter frequency for the eternal goal:");
+                    int frequency;
+                    while (!int.TryParse(Console.ReadLine(), out frequency) || frequency <= 0)
+                    {
+                        Console.WriteLine("Invalid input. Please enter a positive integer for frequency.");
+                    }
+                    GoalsList.Add(new EternalGoal(name, points, frequency));
+                    break;
+                case "checklist":
+                    Console.WriteLine("Enter total occurrences for the checklist goal:");
+                    int totalOccurrences;
+                    while (!int.TryParse(Console.ReadLine(), out totalOccurrences) || totalOccurrences <= 0)
+                    {
+                        Console.WriteLine("Invalid input. Please enter a positive integer for total occurrences.");
+                    }
+                    GoalsList.Add(new ChecklistGoal(name, points, totalOccurrences));
+                    break;
+                default:
+                    Console.WriteLine("Invalid goal type. Skipping this goal.");
+                    break;
+            }
+        }
     }
+
 
     public void RecordEvent(string goalName)
     {

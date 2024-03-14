@@ -10,7 +10,7 @@ class Program
 
     User user = new User(username);
 
-    user.CreateGoal("Read a book", "simple", 50);
+    user.SetGoalsManually();
 
       while (true)
         {
