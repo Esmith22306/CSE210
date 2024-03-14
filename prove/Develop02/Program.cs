@@ -6,66 +6,78 @@ class Program
     {
             Journal journal = new Journal();
             JournalPrompt journalprompt = new JournalPrompt();
-        while (true)
-        {
-            Console.WriteLine("\nPlease select one of the following choices:");
-            Console.WriteLine("1. Write");
-            Console.WriteLine("2. Display");
-            Console.WriteLine("3. Load");
-            Console.WriteLine("4. Save");
-            Console.WriteLine("5. Quit");
+            journalEntry entry = new journalEntry();
 
+
+            Console.Write("\nPlease select one of the following choices:\n");
+            Console.Write("1. Write\n");
+            Console.Write("2. Display\n");
+            Console.Write("3. Load\n");
+            Console.Write("4. Save\n");
+            Console.Write("5. Quit\n");
             Console.Write("\nWhat would you like to do? ");
             string userInput = Console.ReadLine();
+            int action = 0;
+            action = int.Parse(userInput);
 
-            if (int.TryParse(userInput, out int action))
+            while (action != 5)
             {
-                switch (action)
+                //Write Entry 
+                if (action == 1)
                 {
-                    case 1:
-                        string prompt = journalprompt.GetPrompt();
-                        string date = GetDateTime();
+                    string Prompt  = journalprompt.GetPrompt();
+                    string date = GetDateTime();
 
-                        Console.WriteLine(prompt);
-                        Console.Write("--> ");
-                        string userEntry = Console.ReadLine();
+                    
+                    entry._dateTime = date;
+                    entry._prompt = Prompt;
 
-                        journal.AddEntry(date, prompt, userEntry);
-                        break;
+                    Console.Write($"{Prompt}\n");
+                    Console.Write("--> ");
+                    string userEntry = Console.ReadLine();
+                    entry._Entry = userEntry;
+                    journal._journal.Add(entry);
+                    Console.Clear();
 
-                    case 2:
-                        journal.Display();
-                        break;
-
-                    case 3:
-                        journal.LoadJournalFile();
-                        break;
-
-                    case 4:
-                        journal.CreateJournalFile();
-                        break;
-
-                    case 5:
-                        Console.WriteLine("\nThank you for using the JournalProgram!\n");
-                        return;
-
-                    default:
-                        Console.WriteLine("Invalid option. Please try again.");
-                        break;
                 }
+
+                //Display
+                else if (action == 2)
+                {
+                    journal.Display();
+                }
+
+                // Load file 
+                else if (action == 3)
+                {
+                    journal.LoadJournalFile();
+                }
+
+                // Save file 
+                else if (action == 4)
+                {
+                    journal.CreateJournalFile();
+                }
+                // Quit
+                else 
+                {
+                Console.WriteLine("\nThank you for using the JournalProgram!\n");
+
+                }
+
+
             }
-            else
+
+            static string GetDateTime()
             {
-                Console.WriteLine("Invalid input. Please enter a number.");
+                DateTime now = DateTime.Now;
+                string currentDateTime = now.ToString("F");
+                return currentDateTime;
             }
-        }
+            
+
+
+
+
     }
-
-    static string GetDateTime()
-    {
-        return DateTime.Now.ToString("F");
-    }
-
-
-
 }

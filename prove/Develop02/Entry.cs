@@ -3,25 +3,22 @@ using System;
 
 public class journalEntry
 {
-    public string DateTime = "";
+    public string _dateTime = "";
 
-    public string Prompt = "";
+    public string _prompt = "";
 
-    public string Entry = "";
+    public string _Entry = "";
 
 
-    public journalEntry(string dateTime, string prompt, string entry)
+    public journalEntry()
     {
-        DateTime = dateTime;
-        Prompt = prompt;
-        Entry = entry;
+
     }
 
     public void Display()
     {
-        Console.WriteLine($"Date: {DateTime}");
-        Console.WriteLine($"Prompt: {Prompt}");
-        Console.WriteLine($"Entry: {Entry}");
+        Console.WriteLine($"Date: {_dateTime}");
+        Console.WriteLine($"Prompt: {_prompt}");
+        Console.WriteLine($"Entry: {_Entry}");
     }
-
 }

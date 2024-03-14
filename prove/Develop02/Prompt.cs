@@ -20,8 +20,6 @@ public JournalPrompt()
 {
 
 }
-
-
 public string GetPrompt()
 {
     var random = new Random();
