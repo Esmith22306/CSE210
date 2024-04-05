@@ -25,22 +25,12 @@ class Program
 
         videos[2].AddComment("Jery", "Every time jerry mentions airplane food i crack up.");
         videos[2].AddComment(" @TheRealGeorgeConstanza", "Justice for my boi george.");
-        videos[2].AddComment("Ethan_Smith", "The contest is such an underated episode.");
+        videos[2].AddComment("Ethan_Smith", "Te contest is such an underated episode.");
 
         // Displaying information about videos
         foreach (var video in videos)
         {
-            Console.WriteLine($"Title: {video.Title}");
-            Console.WriteLine($"Author: {video.Author}");
-            Console.WriteLine($"Length: {video.Length} seconds");
-            Console.WriteLine($"Number of comments: {video.GetNumberOfComments()}");
-
-            Console.WriteLine("Comments:");
-            foreach (var comment in video.Comments)
-            {
-                Console.WriteLine($"- {comment.UserName}: {comment.Text}");
-            }
-            Console.WriteLine();
+            video.DisplayInformation();
         }
     }
 }

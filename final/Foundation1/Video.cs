@@ -18,8 +18,18 @@ class Video
         Comments.Add(new Comment(userName, text));
     }
 
-    public int GetNumberOfComments()
+    public void DisplayInformation()
     {
-        return Comments.Count;
+        Console.WriteLine($"Title: {Title}");
+        Console.WriteLine($"Author: {Author}");
+        Console.WriteLine($"Length: {Length} seconds");
+        Console.WriteLine($"Number of comments: {Comments.Count}");
+
+        Console.WriteLine("Comments:");
+        foreach (var comment in Comments)
+        {
+            Console.WriteLine($"- {comment.UserName}: {comment.Text}");
+        }
+        Console.WriteLine();
     }
 }
