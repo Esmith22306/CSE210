@@ -4,6 +4,8 @@ public class Activity
 {
     private DateTime _date;
     private int _minutes;
+    public DateTime Date { get => _date; }
+    public int Minutes { get => _minutes; }
 
     public Activity(DateTime date, int minutes)
     {

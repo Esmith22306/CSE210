@@ -19,12 +19,12 @@ public class Running : Activity
     public override double GetSpeed()
     {
         
-        return _distance / (minutes / 60.0);
+        return _distance / (Minutes / 60.0);
     }
 
     public override double GetPace()
     {
-        return minutes / _distance;
+        return Minutes / _distance;
     }
 
     public override string GetSummary()

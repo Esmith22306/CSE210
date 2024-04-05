@@ -15,12 +15,12 @@ public class Swimming : Activity
 
     public override double GetSpeed()
     {
-        return GetDistance() / (minutes / 60.0);
+        return GetDistance() / (Minutes / 60.0);
     }
 
     public override double GetPace()
     {
-        return minutes / GetDistance();
+        return Minutes / GetDistance();
     }
 
     public override string GetSummary()
